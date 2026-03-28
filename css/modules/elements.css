@@ -1,0 +1,120 @@
+.image {
+  display: block;
+  object-fit: cover;
+}
+
+.image--avatar {
+  width: calc(var(--size) * 32);
+  height: calc(var(--size) * 32);
+  border-radius: calc(var(--space) * 4);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  transition: filter var(--transition-duration);
+
+  &:hover {
+    filter: brightness(1.25);
+  }
+}
+
+.badge {
+  padding: calc(var(--space) * 1) calc(var(--space) * 2);
+  border-radius: calc(var(--space) * 2);
+  background-color: var(--ash100-color);
+  color: var(--ash800-color);
+  transition: box-shadow var(--transition-duration), filter var(--transition-duration);
+
+  &:hover {
+    box-shadow: 0 1px 2px 0 var(--ash100-color);
+    filter: brightness(1.0625);
+  }
+}
+
+.button {
+  --primary-button-color: var(--ash50-color);
+  --primary-button-text: var(--ash900-color);
+  padding: 0.5em 1em;
+  border: 1px solid var(--primary-button-color);
+  border-radius: 0.5em;
+  background-color: var(--primary-button-color);
+  color: var(--primary-button-text);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: box-shadow var(--transition-duration), filter var(--transition-duration);
+
+  &:hover {
+    box-shadow: 0 1px 2px 0  var(--primary-button-color);
+    filter: brightness(1.0625);
+  }
+}
+
+.button--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--space) * 8);
+  height: calc(var(--space) * 8);
+  border-radius: calc(var(--space) * 2.5);
+  padding: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: calc(var(--size) * 8);
+  font-weight: 800;
+}
+
+.title--xs {
+  font-size: calc(var(--size) * 6);
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: calc(var(--size) * 6);
+  font-weight: 700;
+}
+
+.subtitle--3xs {
+  font-size: calc(var(--size) * 4);
+  font-weight: 600;
+}
+
+.subtitle--4xs {
+  font-size: calc(var(--size) * 3.5);
+  font-weight: 500;
+}
+
+.text {
+  margin: 0;
+  font-size: calc(var(--size) * 4);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text--sm {
+  font-size: calc(var(--size) * 3.5);
+}
+
+.text--xs {
+  font-size: calc(var(--size) * 3);
+  font-weight: 300;
+}
+
+.text--2xs {
+  font-size: calc(var(--size) * 2.5);
+  font-weight: 300;
+}
+
+.interactive {
+  margin: 0;
+  font-size: calc(var(--size) * 3.5);
+  font-weight: 600;
+}
+
+.interactive--lg {
+  font-size: calc(var(--size) * 4);
+}

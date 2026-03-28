@@ -1,0 +1,29 @@
+.body {
+  margin: 0;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  font-family: var(--primary-font);
+}
+
+@media print {
+  @page {
+    margin: 1.2cm;
+  }
+
+  #download-pdf-btn {
+    display: none;
+  }
+
+  .header {
+    padding-block: calc(var(--space) * 4);
+  }
+
+  .section {
+    padding-block: calc(var(--space) * 2);
+  }
+
+  .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
