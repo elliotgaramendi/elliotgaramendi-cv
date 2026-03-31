@@ -139,7 +139,8 @@ const render = () => {
 const showFallback = () => {
   const root = document.getElementById("content-source-note");
   if (root) {
-    root.textContent = "No se pudo cargar data/cv.json. Se recomienda servir el proyecto con Live Server.";
+    root.textContent =
+      "No se pudo cargar el endpoint remoto del CV. Verifica la disponibilidad del JSON publicado.";
   }
 };
 
@@ -156,7 +157,7 @@ const bootstrap = async () => {
   setupPrintButton();
 
   try {
-    const response = await fetch("./data/cv.json", { cache: "no-store" });
+    const response = await fetch("https://elliotgaramendi.github.io/api/json/cv.json", { cache: "no-store" });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }

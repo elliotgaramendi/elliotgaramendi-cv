@@ -1,7 +1,7 @@
 # Elliot Garamendi CV
 
 CV y portafolio personal construido con **HTML**, **CSS** y **JavaScript vanilla**.
-El contenido dinámico (experiencia, proyectos, skills y logros) se carga desde `data/cv.json`.
+El contenido dinámico (experiencia, proyectos, skills y logros) se carga desde `https://elliotgaramendi.github.io/api/json/cv.json`.
 
 ## Demo
 
