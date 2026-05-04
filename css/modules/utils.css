@@ -18,6 +18,10 @@
   align-items: flex-start;
 }
 
+.jc-center {
+  justify-content: center;
+}
+
 .jc-space-between {
   justify-content: space-between;
 }
@@ -67,11 +71,19 @@
 }
 
 @media (width >=640px) {
+  .md\:fd-row {
+    flex-direction: row;
+  }
+
   .md\:fd-row-reverse {
     flex-direction: row-reverse;
   }
 
   .md\:ai-start {
     align-items: start;
+  }
+
+  .md\:ta-right {
+    text-align: right;
   }
 }

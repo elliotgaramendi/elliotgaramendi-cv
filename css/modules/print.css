@@ -117,8 +117,7 @@
   }
 
   .experience-company,
-  .experience-role,
-  .education-item {
+  .experience-role {
     break-inside: avoid;
     page-break-inside: avoid;
   }

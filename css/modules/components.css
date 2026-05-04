@@ -72,22 +72,3 @@
   height: 100%;
   padding: calc(var(--space) * 4);
 }
-
-.education-item {
-  align-items: flex-start;
-}
-
-.education-item__meta {
-  flex-shrink: 0;
-  text-align: right;
-}
-
-@media (width < 640px) {
-  .education-item {
-    flex-direction: column;
-  }
-
-  .education-item__meta {
-    text-align: left;
-  }
-}

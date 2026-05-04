@@ -95,21 +95,23 @@ const renderProfile = (profile) => {
             width="128" height="128" class="image image--avatar">
         </div>
         <div class="d-flex fd-column ai-center g-2 ta-center md:ai-start">
-          <div class="d-flex ai-center g-2 fw-wrap">
+          <div class="d-flex fd-column ai-center g-2 md:fd-row ">
             <h1 class="title">${escapeHtml(profile.name || "Elliot Garamendi")}</h1>
-            <a href="${escapeHtml(sourceAction.url || "#")}"
-              class="button button--icon interactive interactive--lg source-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="${escapeHtml(sourceLabel)}"
-              title="${escapeHtml(sourceLabel)}">
-              <i class="bi ${escapeHtml(sourceAction.icon || "bi-github")}" aria-hidden="true"></i>
-            </a>
-            <button id="download-pdf-btn" type="button" class="button button--icon interactive interactive--lg"
-              aria-label="${escapeHtml(actionLabel)}"
-              title="${escapeHtml(actionLabel)}">
-              <i class="bi ${escapeHtml(action.icon || "bi-download")}" aria-hidden="true"></i>
-            </button>
+            <div class="d-flex jc-center g-2">
+              <a href="${escapeHtml(sourceAction.url || "#")}"
+                class="button button--icon interactive interactive--lg source-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="${escapeHtml(sourceLabel)}"
+                title="${escapeHtml(sourceLabel)}">
+                <i class="bi ${escapeHtml(sourceAction.icon || "bi-github")}" aria-hidden="true"></i>
+              </a>
+              <button id="download-pdf-btn" type="button" class="button button--icon interactive interactive--lg"
+                aria-label="${escapeHtml(actionLabel)}"
+                title="${escapeHtml(actionLabel)}">
+                <i class="bi ${escapeHtml(action.icon || "bi-download")}" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
           <h2 class="subtitle subtitle--3xs c-ash800">${escapeHtml(profile.headline || "💻 Frontend Developer | 🎓 Docente | 🤖 AI Engineer")}</h2>
           <h3 class="text text--sm c-ash600">${escapeHtml(profile.location || "🌎 Lima, Perú")}</h3>
@@ -193,12 +195,12 @@ const renderEducation = (education) => {
   root.innerHTML = education
     .map(
       (item) => `
-        <div class="d-flex ai-center jc-space-between g-2 education-item">
+        <div class="d-flex fd-column jc-space-between md:fd-row">
           <div>
             <h3 class="subtitle subtitle--3xs c-ash950">${escapeHtml(item.institution)}</h3>
             <h4 class="subtitle subtitle--4xs c-ash600 fw-500">${escapeHtml(item.degree)}</h4>
           </div>
-          <div class="education-item__meta">
+          <div class="md:ta-right">
             <span class="text text--sm c-ash700">${escapeHtml(item.period)}</span>
             <p class="text text--xs c-ash700">${escapeHtml(item.details)}</p>
           </div>
