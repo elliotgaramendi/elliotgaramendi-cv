@@ -15,6 +15,10 @@
     text-shadow: none !important;
   }
 
+  .card {
+    transform: none !important;
+  }
+
   .body {
     background-color: white;
     color: var(--ash950-color);
@@ -23,6 +27,7 @@
   }
 
   #download-pdf-btn,
+  .source-link,
   .action-link,
   .header nav {
     display: none;
@@ -44,6 +49,17 @@
 
   .section {
     padding-block: calc(var(--space) * 2.5);
+  }
+
+  .footer {
+    padding-block: calc(var(--space) * 3) 0;
+    font-size: calc(var(--size) * 2.5);
+  }
+
+  .footer__text {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
   }
 
   .title {

@@ -7,6 +7,8 @@ const state = {
   highlights: []
 };
 
+const CV_ENDPOINT = "https://elliotgaramendi.github.io/api/json/cv.json";
+
 const getObject = (payload, key) => {
   if (payload?.[key] && typeof payload[key] === "object" && !Array.isArray(payload[key])) {
     return payload[key];
@@ -81,6 +83,8 @@ const renderProfile = (profile) => {
   const safeLinks = Array.isArray(profile.links) ? profile.links : [];
   const action = profile.printAction || {};
   const actionLabel = action.label || "Descargar CV en PDF";
+  const sourceAction = profile.sourceAction || {};
+  const sourceLabel = sourceAction.label || "Ver código fuente";
 
   if (root) {
     root.innerHTML = `
@@ -93,6 +97,14 @@ const renderProfile = (profile) => {
         <div class="d-flex fd-column ai-center g-2 ta-center md:ai-start">
           <div class="d-flex ai-center g-2 fw-wrap">
             <h1 class="title">${escapeHtml(profile.name || "Elliot Garamendi")}</h1>
+            <a href="${escapeHtml(sourceAction.url || "#")}"
+              class="button button--icon interactive interactive--lg source-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="${escapeHtml(sourceLabel)}"
+              title="${escapeHtml(sourceLabel)}">
+              <i class="bi ${escapeHtml(sourceAction.icon || "bi-github")}" aria-hidden="true"></i>
+            </a>
             <button id="download-pdf-btn" type="button" class="button button--icon interactive interactive--lg"
               aria-label="${escapeHtml(actionLabel)}"
               title="${escapeHtml(actionLabel)}">
@@ -121,6 +133,24 @@ const renderProfile = (profile) => {
     const safeAbout = Array.isArray(profile.about) ? profile.about.join(" ") : profile.about || "";
     about.textContent = safeAbout;
   }
+};
+
+const renderFooter = (profile) => {
+  const root = document.getElementById("footer-root");
+  if (!root) return;
+  const footer = profile.footer || "Made with ♥ by";
+  const [prefix = "Made with", suffix = "by"] = String(footer).split("♥");
+
+  root.innerHTML = `
+    <div class="container">
+      <p class="footer__text">
+        ${escapeHtml(prefix.trim())}
+        <span class="footer__heart" aria-label="amor" role="img">♥</span>
+        ${escapeHtml(suffix.trim())}
+        <span class="footer__name">${escapeHtml(profile.name || "Elliot Garamendi")}</span>
+      </p>
+    </div>
+  `;
 };
 
 const renderExperience = (experience) => {
@@ -248,6 +278,7 @@ const renderHighlights = (highlights) => {
 
 const render = () => {
   renderProfile(state.profile);
+  renderFooter(state.profile);
   renderExperience(state.experience);
   renderEducation(state.education);
   renderProjects(state.projects);
@@ -259,7 +290,7 @@ const showFallback = () => {
   const root = document.getElementById("content-source-note");
   if (root) {
     root.textContent =
-      "No se pudo cargar el JSON local del CV. Verifica que Live Server esté sirviendo https://elliotgaramendi.github.io/api/json/cv.json.";
+      `No se pudo cargar el JSON del CV. Verifica la disponibilidad de ${CV_ENDPOINT}.`;
   }
 };
 
@@ -274,10 +305,11 @@ const setupPrintButton = () => {
 
 const bootstrap = async () => {
   renderProfile({});
+  renderFooter({});
   setupPrintButton();
 
   try {
-    const response = await fetch("https://elliotgaramendi.github.io/api/json/cv.json", { cache: "no-store" });
+    const response = await fetch(CV_ENDPOINT, { cache: "no-store" });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
