@@ -1,6 +1,7 @@
 @media print {
   @page {
     margin: 0.85cm;
+    margin-inline: 1.5cm;
   }
 
   :root {
@@ -26,10 +27,7 @@
     -webkit-print-color-adjust: exact;
   }
 
-  #download-pdf-btn,
-  .source-link,
-  .action-link,
-  .header nav {
+  #download-pdf-btn {
     display: none;
   }
 
