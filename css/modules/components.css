@@ -4,10 +4,43 @@
 
 .header .button--icon {
   color: var(--ash700-color);
+
+  &:hover {
+    color: var(--ash950-color);
+  }
 }
 
-.header .button--icon:hover {
-  color: var(--ash950-color);
+.profile-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--space) * 1.5);
+}
+
+.profile-contact__link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) * 1);
+  color: var(--ash600-color);
+  font-size: calc(var(--size) * 3);
+  line-height: 1.2;
+  text-decoration: none;
+  transition: color var(--transition-duration), filter var(--transition-duration);
+
+  &:hover {
+    color: var(--ash950-color);
+    filter: brightness(1.08);
+  }
+}
+
+.profile-contact__icon {
+  color: var(--ash700-color);
+  font-size: 0.95em;
+}
+
+.profile-contact--footer {
+  max-width: min(100%, calc(var(--size) * 160));
 }
 
 .section {
@@ -19,6 +52,13 @@
   color: var(--ash600-color);
   font-size: calc(var(--size) * 3);
   text-align: center;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--space) * 2);
 }
 
 .footer__text {
@@ -59,16 +99,40 @@
   border: 1px solid var(--ash50-color);
   background-color: var(--white-color);
   transition: border-color var(--transition-duration), transform var(--transition-duration), box-shadow var(--transition-duration);
-}
 
-.card:hover {
-  border-color: var(--ash100-color);
-  box-shadow: 0 2px 8px 0 var(--shadow-color);
-  transform: translateY(-1px);
+  &:hover {
+    border-color: var(--ash100-color);
+    box-shadow: 0 2px 8px 0 var(--shadow-color);
+    transform: translateY(-1px);
+  }
 }
 
 .card__content {
   box-sizing: border-box;
   height: 100%;
   padding: calc(var(--space) * 4);
+}
+
+.project-card {
+  overflow: hidden;
+}
+
+.project-card__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ash50-color);
+  background-color: var(--ash50-color);
+}
+
+.project-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-duration), filter var(--transition-duration);
+}
+
+.project-card:hover .project-card__image {
+  filter: brightness(1.03);
+  transform: scale(1.015);
 }

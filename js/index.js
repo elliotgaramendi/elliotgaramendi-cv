@@ -77,6 +77,63 @@ const renderActionLinks = (links) => {
   `;
 };
 
+const getContactLinks = (contact = {}) => {
+  const links = [];
+
+  if (contact.email) {
+    links.push({
+      label: contact.email,
+      url: `mailto:${contact.email}`,
+      icon: "bi-envelope",
+      isExternal: false
+    });
+  }
+
+  if (contact.phone) {
+    links.push({
+      label: contact.phoneLabel || contact.phone,
+      url: `tel:${contact.phone}`,
+      icon: "bi-phone",
+      isExternal: false
+    });
+  }
+
+  if (contact.whatsappUrl) {
+    links.push({
+      label: "WhatsApp",
+      url: contact.whatsappUrl,
+      icon: "bi-whatsapp",
+      isExternal: true
+    });
+  }
+
+  return links;
+};
+
+const renderContactLinks = (contact, modifier = "") => {
+  const links = getContactLinks(contact);
+  if (links.length === 0) return "";
+
+  return `
+    <div class="profile-contact ${escapeHtml(modifier)}">
+      ${links
+        .map(
+          (link) => `
+            <a href="${escapeHtml(link.url)}"
+              class="profile-contact__link"
+              ${link.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ""}
+              aria-label="${escapeHtml(link.label)}"
+              title="${escapeHtml(link.label)}">
+              <i class="profile-contact__icon bi ${escapeHtml(link.icon)}" aria-hidden="true"></i>
+              <span class="profile-contact__text">${escapeHtml(link.label)}</span>
+            </a>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+};
+
 const renderProfile = (profile) => {
   const root = document.getElementById("header-root");
   const about = document.getElementById("about-root");
@@ -115,6 +172,7 @@ const renderProfile = (profile) => {
           </div>
           <h2 class="subtitle subtitle--3xs c-ash800">${escapeHtml(profile.headline || "💻 Frontend Developer | 🎓 Docente | 🤖 AI Engineer")}</h2>
           <h3 class="text text--sm c-ash600">${escapeHtml(profile.location || "🌎 Lima, Perú")}</h3>
+          ${renderContactLinks(profile.contact)}
           <nav class="d-flex g-2">
             ${safeLinks
               .map(
@@ -144,7 +202,8 @@ const renderFooter = (profile) => {
   const [prefix = "Made with", suffix = "by"] = String(footer).split("♥");
 
   root.innerHTML = `
-    <div class="container">
+    <div class="container footer__container">
+      ${renderContactLinks(profile.contact, "profile-contact--footer")}
       <p class="footer__text">
         ${escapeHtml(prefix.trim())}
         <span class="footer__heart" aria-label="amor" role="img">♥</span>
@@ -217,8 +276,22 @@ const renderProjects = (projects) => {
   root.innerHTML = projects
     .map((project) => {
       const tags = Array.isArray(project.tags) ? project.tags : [];
+      const projectImage = project.image
+        ? `
+          <div class="project-card__media">
+            <img src="${escapeHtml(project.image)}"
+              alt="${escapeHtml(project.imageAlt || `Captura de ${project.name || "proyecto"}`)}"
+              class="project-card__image"
+              loading="lazy"
+              width="640"
+              height="360">
+          </div>
+        `
+        : "";
+
       return `
-        <div class="card">
+        <article class="card project-card">
+          ${projectImage}
           <div class="card__content d-flex fd-column g-2">
             <div class="d-flex ai-start jc-space-between g-2">
               <a href="${escapeHtml(project.url || "#")}" target="_blank" rel="noopener noreferrer" class="link interactive interactive--lg c-ash950">
@@ -231,7 +304,7 @@ const renderProjects = (projects) => {
               ${tags.map((tag) => `<span class="badge text text--2xs">${escapeHtml(tag)}</span>`).join("")}
             </div>
           </div>
-        </div>
+        </article>
       `;
     })
     .join("");
@@ -312,9 +385,9 @@ const bootstrap = async () => {
 
   try {
     const response = await fetch(CV_ENDPOINT, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
 
     const payload = await response.json();
     state.profile = getObject(payload, "profile");

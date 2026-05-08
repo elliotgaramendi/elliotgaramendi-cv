@@ -54,6 +54,14 @@
     font-size: calc(var(--size) * 2.5);
   }
 
+  .profile-contact {
+    gap: calc(var(--space) * 1.5);
+  }
+
+  .profile-contact__link {
+    font-size: calc(var(--size) * 2.75);
+  }
+
   .footer__text {
     padding: 0;
     border: 0;
@@ -100,6 +108,18 @@
 
   .card__content {
     padding: calc(var(--space) * 3);
+  }
+
+  .project-card__media {
+    aspect-ratio: 16 / 7;
+    border-bottom-color: var(--ash100-color);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .project-card__image {
+    transform: none !important;
+    filter: none !important;
   }
 
   .badge {
