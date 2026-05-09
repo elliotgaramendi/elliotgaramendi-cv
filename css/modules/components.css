@@ -109,7 +109,6 @@
 
 .card__content {
   box-sizing: border-box;
-  height: 100%;
   padding: calc(var(--space) * 4);
 }
 
@@ -118,6 +117,7 @@
 }
 
 .project-card__media {
+  display: block;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-bottom: 1px solid var(--ash50-color);

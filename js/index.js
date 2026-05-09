@@ -278,14 +278,14 @@ const renderProjects = (projects) => {
       const tags = Array.isArray(project.tags) ? project.tags : [];
       const projectImage = project.image
         ? `
-          <div class="project-card__media">
+          <a href="${escapeHtml(project.url || "#")}" target="_blank" rel="noopener noreferrer" class="project-card__media">
             <img src="${escapeHtml(project.image)}"
               alt="${escapeHtml(project.imageAlt || `Captura de ${project.name || "proyecto"}`)}"
               class="project-card__image"
               loading="lazy"
               width="640"
               height="360">
-          </div>
+          </a>
         `
         : "";
 
